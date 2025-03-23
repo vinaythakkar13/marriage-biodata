@@ -114,12 +114,31 @@ export default function Home() {
           </div>
 
 
-          <Button
-            size="lg"
-            className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 animate-bounce glow"
-          >
-            Explore My Profile
-          </Button>
+          <div className="flex flex-col items-center">
+            <Button
+              size="lg"
+              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 animate-bounce glow text-white"
+            >
+              Scroll To View My Profile
+            </Button>
+
+            {/* Down Arrow with Animation */}
+            <div className="mt-2 animate-bounce">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-8 h-8 text-white"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M12 16a1 1 0 0 1-.71-.29l-5-5a1 1 0 1 1 1.42-1.42L12 13.59l4.29-4.3a1 1 0 1 1 1.42 1.42l-5 5A1 1 0 0 1 12 16Z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </div>
+          </div>
+
         </div>
         {/* <AnimatedCharacter
           imageUrl="https://assets8.lottiefiles.com/private_files/lf30_WdTEui.json"
@@ -295,7 +314,7 @@ export default function Home() {
                 </div>
                 <div className="p-6 rounded-xl bg-white/5">
                   <p className="font-semibold text-xl mb-2">Mother's Contact No</p>
-                  <Link href="tel:+919375293636" className="text-primary/60">+919375293636</Link>
+                  <Link href="tel:+919375293636" className="text-primary/60">+9193752 93636</Link>
                 </div>
                 <div className="p-6 rounded-xl bg-white/5">
                   <p className="font-semibold text-xl mb-2">Siblings</p>
@@ -373,13 +392,13 @@ export default function Home() {
                       <Link href='tel:+919737050180' className="font-medium">+91 97370 50180</Link>
                     </div>
                   </div>
-                  <div className="p-4 rounded-lg bg-white/5 flex items-center gap-4 hover:scale-105 transition-transform">
-                    <div className="h-12 w-12 rounded-full bg-blue-400/20 flex items-center justify-center">
+                  <div className="p-4 rounded-lg bg-white/5 flex items-start gap-4 hover:scale-105 transition-transform">
+                    <div className="h-12 w-12 min-w-12 rounded-full bg-blue-400/20 flex items-center justify-center">
                       <MapPin className="h-6 w-6 text-blue-400" />
                     </div>
                     <div>
                       <p className="text-sm text-primary/60">Location</p>
-                      <p className="font-medium">103/4, Rasala Camp, Uper Coat, Bhavnagar - 364 001</p>
+                      <p className="font-medium whitespace-pre-wrap">{`"Laxmi Niwas", 103/4,\nRasala Camp, Uper Coat,\nBhavnagar - 364 001`}</p>
                     </div>
                   </div>
                 </div>
