@@ -380,7 +380,7 @@ export default function Home() {
                     </div>
                     <div>
                       <p className="text-sm text-primary/60">Email</p>
-                      <Link href={'mailto:thakkarvinay6293@gmail.com'} className="font-medium">thakarvinay6293@gmail.com</Link>
+                      <Link href={'mailto:thakkarvinay6293@gmail.com'} className="font-medium">thakkarvinay6293@gmail.com</Link>
                     </div>
                   </div>
                   <div className="p-4 rounded-lg bg-white/5 flex items-center gap-4 hover:scale-105 transition-transform">
