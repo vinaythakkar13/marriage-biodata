@@ -282,7 +282,7 @@ export default function Home() {
                   <p className="text-primary/60">Late. Shri MohanLal Golaram Thakkar</p>
                 </div>
                 <div className="p-6 rounded-xl bg-white/5">
-                  <p className="font-semibold text-xl mb-2">Mother</p>
+                  <p className="font-semibold text-xl mb-2">Grand Mother</p>
                   <p className="text-primary/60">Late Smt. Bhagwatiben Mohanlal Thakkar</p>
                 </div>
                 <div className="p-6 rounded-xl bg-white/5">
