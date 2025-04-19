@@ -1,20 +1,17 @@
 "use client";
 
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Download, Mail, Phone, MapPin, Heart, GraduationCap, Users, Coffee, Star, Briefcase, Award } from 'lucide-react';
+import { Mail, Phone, MapPin, Users, Coffee, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { Separator } from '@/components/ui/separator';
-import { AnimatedCharacter } from './components/AnimatedCharacter';
 import { SparkleEffect } from './components/SparkleEffect';
 import ProfilePicture from '@/assets/images/vinay_thakkar_profile.jpg';
 import Link from 'next/link';
 
 gsap.registerPlugin(ScrollTrigger);
-import React from 'react';
-import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import ExpandableCard from './components/ExpandableCard';
+import dynamic from 'next/dynamic';
 
 export default function Home() {
   const mainRef = useRef<HTMLDivElement>(null);
@@ -84,6 +81,11 @@ export default function Home() {
     });
   }, []);
 
+  const DotLottieReact = dynamic(
+    () => import('@lottiefiles/dotlottie-react').then(mod => mod.DotLottieReact),
+    { ssr: false }
+  );
+
   return (
     <main ref={mainRef} className="min-h-screen bg-gradient-to-b from-background via-background to-accent overflow-hidden">
       {/* Hero Section */}
@@ -113,7 +115,6 @@ export default function Home() {
             </div>
           </div>
 
-
           <div className="flex flex-col items-center">
             <Button
               size="lg"
@@ -140,15 +141,6 @@ export default function Home() {
           </div>
 
         </div>
-        {/* <AnimatedCharacter
-          imageUrl="https://assets8.lottiefiles.com/private_files/lf30_WdTEui.json"
-          position="left"
-        />
-        <AnimatedCharacter
-          imageUrl="https://assets5.lottiefiles.com/packages/lf20_v1yudlrx.json"
-          position="right"
-          offset={300}
-        /> */}
       </section>
 
       {/* Personal Details */}

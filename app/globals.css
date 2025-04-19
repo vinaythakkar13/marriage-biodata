@@ -52,6 +52,7 @@
   }
   body {
     @apply bg-background text-foreground;
+    box-sizing: border-box;
   }
 }
 
@@ -90,7 +91,7 @@
 
 .gradient-border {
   position: relative;
-  border-radius: theme('borderRadius.lg');
+  border-radius: theme("borderRadius.lg");
   background: linear-gradient(45deg, #2196f3, #e91e63);
   padding: 1px;
 }
@@ -105,9 +106,7 @@
   border-radius: inherit;
   padding: 2px;
   background: linear-gradient(45deg, #2196f3, #e91e63);
-  -webkit-mask: 
-    linear-gradient(#fff 0 0) content-box, 
-    linear-gradient(#fff 0 0);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
 }
@@ -149,15 +148,15 @@
 }
 
 .character-1 {
-  background-image: url('https://assets8.lottiefiles.com/private_files/lf30_WdTEui.json');
+  background-image: url("https://assets8.lottiefiles.com/private_files/lf30_WdTEui.json");
 }
 
 .character-2 {
-  background-image: url('https://assets5.lottiefiles.com/packages/lf20_v1yudlrx.json');
+  background-image: url("https://assets5.lottiefiles.com/packages/lf20_v1yudlrx.json");
 }
 
 .character-3 {
-  background-image: url('https://assets3.lottiefiles.com/packages/lf20_xvrofzfk.json');
+  background-image: url("https://assets3.lottiefiles.com/packages/lf20_xvrofzfk.json");
 }
 
 .sparkle {
