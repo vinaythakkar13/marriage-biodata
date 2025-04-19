@@ -10,7 +10,6 @@ import ProfilePicture from '@/assets/images/vinay_thakkar_profile.jpg';
 import Link from 'next/link';
 
 gsap.registerPlugin(ScrollTrigger);
-import ExpandableCard from './components/ExpandableCard';
 import dynamic from 'next/dynamic';
 
 export default function Home() {
