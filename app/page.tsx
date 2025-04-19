@@ -306,7 +306,7 @@ export default function Home() {
                 </div>
                 <div className="p-6 rounded-xl bg-white/5">
                   <p className="font-semibold text-xl mb-2">Mother's Contact No</p>
-                  <Link href="tel:+919375293636" className="text-primary/60">+91 93752 93636</Link>
+                  <Link href="tel:+919375293636" className="text-primary/60">{`+91 93752 93636`}</Link>
                 </div>
                 <div className="p-6 rounded-xl bg-white/5">
                   <p className="font-semibold text-xl mb-2">Siblings</p>
