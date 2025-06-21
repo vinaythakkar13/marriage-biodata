@@ -11,9 +11,11 @@ import Link from 'next/link';
 
 gsap.registerPlugin(ScrollTrigger);
 import dynamic from 'next/dynamic';
+import Card from './components/ExpandableCard';
 
 export default function Home() {
   const mainRef = useRef<HTMLDivElement>(null);
+  const personalDetailsRef = useRef<HTMLElement>(null);
 
   const hobbies = [
     { animation: "https://lottie.host/a27ddeb4-4bd0-470b-8084-2061bc4859f3/jRVXrsWOIc.lottie", text: "Coding" },
@@ -85,31 +87,66 @@ export default function Home() {
     { ssr: false }
   );
 
+  // Smooth scroll function
+  const scrollToSection = (sectionRef: React.RefObject<HTMLElement>) => {
+    if (sectionRef.current) {
+      sectionRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    }
+  };
+
   return (
     <main ref={mainRef} className="min-h-screen bg-gradient-to-b from-background via-background to-accent overflow-hidden">
       {/* Hero Section */}
       <section className="hero-section relative min-h-screen flex items-center justify-center overflow-hidden">
-        <div className="hero-pattern absolute inset-0 opacity-30"></div>
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background"></div>
-        <SparkleEffect />
-        <div className="container px-4 text-center relative animate-section z-10">
-          <div className="gradient-border rounded-sm mx-auto mb-12 md:p-1 glow h-[440px] md:h-60 flex justify-center items-center align-middle">
-            <div className='flex flex-col-reverse md:flex-row items-center gap-8'>
-              <div className='flex flex-col gap-6'>
+        {/* Enhanced gradient background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-blue-100/30"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-200/20 via-transparent to-purple-200/20"></div>
 
-                <h1 className="text-5xl md:text-7xl font-bold white-text">VINAY THAKKAR</h1>
-                <div className="flex items-center justify-center md:justify-start gap-3">
-                  <Star className="w-5 h-5 text-yellow-500" />
-                  <p className="text-xl text-primary/80">Software Engineer</p>
-                  <Star className="w-5 h-5 text-yellow-500" />
+        {/* Animated gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-400/10 via-purple-400/10 to-pink-400/10 animate-pulse"></div>
+
+        {/* Geometric pattern overlay */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-br from-blue-400 to-purple-600 rounded-full blur-3xl"></div>
+          <div className="absolute top-40 right-20 w-24 h-24 bg-gradient-to-br from-purple-400 to-pink-600 rounded-full blur-2xl"></div>
+          <div className="absolute bottom-20 left-1/3 w-20 h-20 bg-gradient-to-br from-indigo-400 to-blue-600 rounded-full blur-xl"></div>
+        </div>
+
+        <div className="hero-pattern absolute inset-0 opacity-20"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/30 to-background"></div>
+        <SparkleEffect />
+
+        <div className="container px-4 text-center relative animate-section z-10 mx-auto">
+          {/* Enhanced profile card with better styling */}
+          <div className="gradient-border-dark rounded-2xl mx-auto mb-12 md:p-2 glow h-[480px] md:h-72 flex justify-center items-center align-middle backdrop-blur-sm bg-gradient-to-br from-[rgb(0,0,102)] to-[rgb(102,153,255)]">
+            <div className='flex flex-col-reverse md:flex-row items-center gap-8 p-6'>
+              <div className='flex flex-col gap-6'>
+                <h1 className="text-5xl md:text-7xl font-bold text-white">
+                  VINAY THAKKAR
+                </h1>
+                <div className='flex flex-col gap-2 md:gap-0'>
+                  <div className="flex items-center justify-center md:justify-start gap-3">
+                    <Star className="w-5 h-5 text-yellow-500 drop-shadow-sm" />
+                    <p className="text-xl text-white font-medium">Software Engineer</p>
+                    <Star className="w-5 h-5 text-yellow-500 drop-shadow-sm" />
+                  </div>
+                  <p className="text-white text-left text-lg max-w-md">
+                    Passionate developer crafting digital experiences with modern technologies
+                  </p>
                 </div>
               </div>
-              <div className="relative w-48 h-48 mx-auto rounded-full overflow-hidden transition-transform duration-500 hover:scale-105 animate-float">
+              <div className="relative w-48 h-48 mx-auto rounded-full overflow-hidden transition-transform duration-500 hover:scale-105 animate-float shadow-2xl border-4 border-white">
                 <img
                   src={ProfilePicture.src}
                   alt="Profile"
                   className="w-full h-full object-cover"
                 />
+                {/* Profile image glow effect */}
+                {/* <div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-full"></div> */}
               </div>
             </div>
           </div>
@@ -117,16 +154,13 @@ export default function Home() {
           <div className="flex flex-col items-center">
             <Button
               size="lg"
-              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 animate-bounce glow text-white"
+              onClick={() => scrollToSection(personalDetailsRef)}
+              className="bg-gradient-to-r animate-bounce from-blue-600 via-purple-600 to-indigo-600 hover:from-blue-700 hover:via-purple-700 hover:to-indigo-700 glow text-white shadow-xl px-8 py-4 text-lg font-semibold rounded-full transition-all hover:scale-105 flex items-center gap-2"
             >
-              Scroll To View My Profile
-            </Button>
-
-            {/* Down Arrow with Animation */}
-            <div className="mt-2 animate-bounce">
+              <span>Scroll To View My Profile</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="w-8 h-8 text-white"
+                className="w-6 h-6 text-white"
                 viewBox="0 0 24 24"
                 fill="currentColor"
               >
@@ -136,180 +170,130 @@ export default function Home() {
                   clipRule="evenodd"
                 />
               </svg>
-            </div>
+            </Button>
           </div>
 
         </div>
       </section>
 
       {/* Personal Details */}
-      <section className="md:py-32 py-16 animate-section relative">
+      <section ref={personalDetailsRef} className="md:py-32 py-16 animate-section relative smooth-scroll-target">
         <div className="absolute inset-0 animated-bg opacity-10"></div>
-        <div className="container px-4 relative">
+        <div className="container px-4 relative mx-auto">
           <h2 className="text-4xl font-bold mb-16 text-center gradient-text">Personal Details</h2>
-          <div className="grid gap-8 max-w-xl mx-auto">
-            <div className="glass-card p-8 rounded-2xl card-hover-effect">
-              <dl className="space-y-6">
-                <div>
-                  <dt className="text-sm text-primary/60">Date of Birth</dt>
-                  <dd className="text-lg font-medium">February 06, 1998 </dd>
-                  <div className="progress-bar mt-2" data-progress="100%"></div>
-                </div>
+          <div className="flex justify-center">
+            <div className="w-full max-w-2xl">
+              <div className="glass-card glass-card-elegant p-8 rounded-3xl card-hover-effect">
+                <dl className="space-y-6">
+                  <div>
+                    <dt className="text-sm text-gray-500 font-medium">Date of Birth</dt>
+                    <dd className="text-lg font-semibold text-gray-800">February 06, 1998 </dd>
+                    <div className="progress-bar mt-2" data-progress="100%"></div>
+                  </div>
 
-                <div>
-                  <dt className="text-sm text-primary/60">Birth Time</dt>
-                  <dd className="text-lg font-medium">10:45 PM</dd>
-                  <div className="progress-bar mt-2" data-progress="100%"></div>
-                </div>
+                  <div>
+                    <dt className="text-sm text-gray-500 font-medium">Birth Time</dt>
+                    <dd className="text-lg font-semibold text-gray-800">10:45 PM</dd>
+                    <div className="progress-bar mt-2" data-progress="100%"></div>
+                  </div>
 
-                <div>
-                  <dt className="text-sm text-primary/60">Place of Birth</dt>
-                  <dd className="text-lg font-medium">Bhavnagar (Gujarat)</dd>
-                  <div className="progress-bar mt-2" data-progress="100%"></div>
-                </div>
+                  <div>
+                    <dt className="text-sm text-gray-500 font-medium">Place of Birth</dt>
+                    <dd className="text-lg font-semibold text-gray-800">Bhavnagar (Gujarat)</dd>
+                    <div className="progress-bar mt-2" data-progress="100%"></div>
+                  </div>
 
-                <div>
-                  <dt className="text-sm text-primary/60">Manglik</dt>
-                  <dd className="text-lg font-medium">No</dd>
-                  <div className="progress-bar mt-2" data-progress="100%"></div>
-                </div>
+                  <div>
+                    <dt className="text-sm text-gray-500 font-medium">Manglik</dt>
+                    <dd className="text-lg font-semibold text-gray-800">No</dd>
+                    <div className="progress-bar mt-2" data-progress="100%"></div>
+                  </div>
 
-                <div>
-                  <dt className="text-sm text-primary/60">Complexion</dt>
-                  <dd className="text-lg font-medium">Fair</dd>
-                  <div className="progress-bar mt-2" data-progress="100%"></div>
-                </div>
+                  <div>
+                    <dt className="text-sm text-gray-500 font-medium">Complexion</dt>
+                    <dd className="text-lg font-semibold text-gray-800">Fair</dd>
+                    <div className="progress-bar mt-2" data-progress="100%"></div>
+                  </div>
 
-                <div>
-                  <dt className="text-sm text-primary/60">Height</dt>
-                  <dd className="text-lg font-medium">5'2"</dd>
-                  <div className="progress-bar mt-2" data-progress="100%"></div>
-                </div>
+                  <div>
+                    <dt className="text-sm text-gray-500 font-medium">Height</dt>
+                    <dd className="text-lg font-semibold text-gray-800">5'2"</dd>
+                    <div className="progress-bar mt-2" data-progress="100%"></div>
+                  </div>
 
-                <div>
-                  <dt className="text-sm text-primary/60">Weight</dt>
-                  <dd className="text-lg font-medium">68 Kg</dd>
-                  <div className="progress-bar mt-2" data-progress="100%"></div>
-                </div>
+                  <div>
+                    <dt className="text-sm text-gray-500 font-medium">Weight</dt>
+                    <dd className="text-lg font-semibold text-gray-800">68 Kg</dd>
+                    <div className="progress-bar mt-2" data-progress="100%"></div>
+                  </div>
 
-                <div>
-                  <dt className="text-sm text-primary/60">Religion & Caste</dt>
-                  <dd className="text-lg font-medium">Sindhi Hindu, Lohana</dd>
-                  <div className="progress-bar mt-2" data-progress="100%"></div>
-                </div>
+                  <div>
+                    <dt className="text-sm text-gray-500 font-medium">Religion & Caste</dt>
+                    <dd className="text-lg font-semibold text-gray-800">Sindhi Hindu, Lohana</dd>
+                    <div className="progress-bar mt-2" data-progress="100%"></div>
+                  </div>
 
-                <div>
-                  <dt className="text-sm text-primary/60">Education</dt>
-                  <dd className="text-lg font-medium">Master of Computer Application</dd>
-                  <div className="progress-bar mt-2" data-progress="100%"></div>
-                </div>
+                  <div>
+                    <dt className="text-sm text-gray-500 font-medium">Education</dt>
+                    <dd className="text-lg font-semibold text-gray-800">Master of Computer Application</dd>
+                    <div className="progress-bar mt-2" data-progress="100%"></div>
+                  </div>
 
-                <div>
-                  <dt className="text-sm text-primary/60">Profession</dt>
-                  <dd className="text-lg font-medium">Software Engineer</dd>
-                  <div className="progress-bar mt-2" data-progress="100%"></div>
-                </div>
+                  <div>
+                    <dt className="text-sm text-gray-500 font-medium">Profession</dt>
+                    <dd className="text-lg font-semibold text-gray-800">Software Engineer</dd>
+                    <div className="progress-bar mt-2" data-progress="100%"></div>
+                  </div>
 
-                <div>
-                  <dt className="text-sm text-primary/60">Company</dt>
-                  <dd className="text-lg font-medium">Bytes Technolabs, Ahmedabad</dd>
-                  <div className="progress-bar mt-2" data-progress="100%"></div>
-                </div>
-              </dl>
+                  <div>
+                    <dt className="text-sm text-gray-500 font-medium">Company</dt>
+                    <dd className="text-lg font-semibold text-gray-800">Bytes Technolabs, Ahmedabad</dd>
+                    <div className="progress-bar mt-2" data-progress="100%"></div>
+                  </div>
+                </dl>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Academic & Professional */}
-      {/* <section className="md:py-32 py-16 animate-section">
-        <div className="container px-4">
-          <h2 className="text-4xl font-bold mb-16 text-center gradient-text">Academic & Professional</h2>
-          <div className="max-w-4xl mx-auto space-y-8">
-            <div className="glass-card p-8 rounded-2xl">
-              <h3 className="text-2xl font-semibold mb-8 flex items-center gap-3">
-                <GraduationCap className="h-8 w-8 text-blue-400" />
-                Education Journey
-              </h3>
-              <div className="space-y-8">
-                <div className="relative pl-8 pb-8 border-l-2 border-blue-400/30">
-                  <div className="absolute w-4 h-4 bg-blue-400 rounded-full -left-[9px] top-0"></div>
-                  <p className="font-semibold text-xl mb-2">Master of Computer Application</p>
-                  <p className="text-primary/60">Gujarat University (2018-2021)</p>
-                </div>
-                <div className="relative pl-8 border-l-2 border-blue-400/30">
-                  <div className="absolute w-4 h-4 bg-blue-400 rounded-full -left-[9px] top-0"></div>
-                  <p className="font-semibold text-xl mb-2">Bachelor of Computer Application</p>
-                  <p className="text-primary/60">Maharaja Krishnakumarsinhji Bhavnagar University (2015-2018)</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="glass-card p-8 rounded-2xl">
-              <h3 className="text-2xl font-semibold mb-8 flex items-center gap-3">
-                <Briefcase className="h-8 w-8 text-purple-400" />
-                Professional Journey
-              </h3>
-              <div className="space-y-8">
-                <div className="relative pl-8 pb-8 border-l-2 border-purple-400/30">
-                  <div className="absolute w-4 h-4 bg-purple-400 rounded-full -left-[9px] top-0"></div>
-                  <p className="font-semibold text-xl mb-2">Software Enginer</p>
-                  <p className="text-primary/60">2022 - Present</p>
-                  <div className="mt-4 flex gap-2">
-                    <span className="px-3 py-1 rounded-full bg-purple-400/20 text-sm">Team Lead</span>
-                    <span className="px-3 py-1 rounded-full bg-purple-400/20 text-sm">Full Stack</span>
-                  </div>
-                </div>
-                <div className="relative pl-8 border-l-2 border-purple-400/30">
-                  <div className="absolute w-4 h-4 bg-purple-400 rounded-full -left-[9px] top-0"></div>
-                  <p className="font-semibold text-xl mb-2">Software Engineer at Microsoft</p>
-                  <p className="text-primary/60">2018 - 2020</p>
-                  <div className="mt-4 flex gap-2">
-                    <span className="px-3 py-1 rounded-full bg-purple-400/20 text-sm">Backend</span>
-                    <span className="px-3 py-1 rounded-full bg-purple-400/20 text-sm">Cloud</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section> */}
-
       {/* Family Details */}
       <section className="md:py-32 py-16 animate-section relative">
         <div className="absolute inset-0 bg-gradient-to-b from-accent/20 to-transparent"></div>
-        <div className="container px-4 relative">
+        <div className="container px-4 relative mx-auto">
           <h2 className="text-4xl font-bold mb-16 text-center gradient-text">Family Details</h2>
-          <div className="max-w-xl mx-auto">
-            <div className="glass-card p-4 md:p-8 rounded-2xl">
-              <h3 className="text-2xl font-semibold mb-8 flex items-center gap-3">
-                <Users className="h-8 w-8 text-blue-400" />
-                Family Background
-              </h3>
-              <div className="space-y-8">
-                <div className="p-6 rounded-xl bg-white/5">
-                  <p className="font-semibold text-xl mb-2">Grand Father</p>
-                  <p className="text-primary/60">Late. Shri MohanLal Golaram Thakkar</p>
-                </div>
-                <div className="p-6 rounded-xl bg-white/5">
-                  <p className="font-semibold text-xl mb-2">Grand Mother</p>
-                  <p className="text-primary/60">Late Smt. Bhagwatiben Mohanlal Thakkar</p>
-                </div>
-                <div className="p-6 rounded-xl bg-white/5">
-                  <p className="font-semibold text-xl mb-2">Father</p>
-                  <p className="text-primary/60">Late. Shri Rajkumar MohanLal Thakkar</p>
-                </div>
-                <div className="p-6 rounded-xl bg-white/5">
-                  <p className="font-semibold text-xl mb-2">Mother</p>
-                  <p className="text-primary/60">Smt. Bhartiben Rajkumar Thakkar</p>
-                </div>
-                <div className="p-6 rounded-xl bg-white/5">
-                  <p className="font-semibold text-xl mb-2">Mother's Contact No</p>
-                  <Link href="tel:+919375293636" className="text-primary/60">{`+91 93752 93636`}</Link>
-                </div>
-                <div className="p-6 rounded-xl bg-white/5">
-                  <p className="font-semibold text-xl mb-2">Siblings</p>
-                  <p className="text-primary/60">1 Elder Sister (not Married)</p>
+          <div className="flex justify-center">
+            <div className="w-full max-w-2xl">
+              <div className="glass-card glass-card-primary p-8 rounded-3xl">
+                <h3 className="text-2xl font-semibold mb-8 flex items-center gap-3 text-gray-800">
+                  <Users className="h-8 w-8 text-blue-500" />
+                  Family Background
+                </h3>
+                <div className="space-y-6">
+                  <div className="p-6 rounded-2xl bg-white/60 border border-white/80 backdrop-blur-sm">
+                    <p className="font-semibold text-xl mb-2 text-gray-800">Grand Father</p>
+                    <p className="text-gray-600">Late. Shri MohanLal Golaram Thakkar</p>
+                  </div>
+                  <div className="p-6 rounded-2xl bg-white/60 border border-white/80 backdrop-blur-sm">
+                    <p className="font-semibold text-xl mb-2 text-gray-800">Grand Mother</p>
+                    <p className="text-gray-600">Late Smt. Bhagwatiben Mohanlal Thakkar</p>
+                  </div>
+                  <div className="p-6 rounded-2xl bg-white/60 border border-white/80 backdrop-blur-sm">
+                    <p className="font-semibold text-xl mb-2 text-gray-800">Father</p>
+                    <p className="text-gray-600">Late. Shri Rajkumar MohanLal Thakkar</p>
+                  </div>
+                  <div className="p-6 rounded-2xl bg-white/60 border border-white/80 backdrop-blur-sm">
+                    <p className="font-semibold text-xl mb-2 text-gray-800">Mother</p>
+                    <p className="text-gray-600">Smt. Bhartiben Rajkumar Thakkar</p>
+                  </div>
+                  <div className="p-6 rounded-2xl bg-white/60 border border-white/80 backdrop-blur-sm">
+                    <p className="font-semibold text-xl mb-2 text-gray-800">Mother's Contact No</p>
+                    <Link href="tel:+919375293636" className="text-blue-600 hover:text-blue-700 transition-colors font-medium">{`+91 93752 93636`}</Link>
+                  </div>
+                  <div className="p-6 rounded-2xl bg-white/60 border border-white/80 backdrop-blur-sm">
+                    <p className="font-semibold text-xl mb-2 text-gray-800">Siblings</p>
+                    <p className="text-gray-600">1 Elder Sister (not Married)</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -319,36 +303,37 @@ export default function Home() {
 
       {/* Hobbies & Interests */}
       <section className="md:py-32 py-16 animate-section">
-        <div className="container px-4">
+        <div className="container px-4 mx-auto">
           <h2 className="text-4xl font-bold mb-16 text-center gradient-text">Hobbies & Interests</h2>
-          <div className="max-w-xl mx-auto">
-            <div className="glass-card p-4 md:p-8 rounded-2xl">
-              <h3 className="text-2xl font-semibold mb-8 flex items-center gap-3">
-                <Coffee className="h-8 w-8 text-purple-400" />
-                What I Love
-              </h3>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
-                {hobbies.map((hobby, index) => {
-                  return (
-                    <div
-                      key={index}
-                      className="p-6 text-center rounded-xl bg-white/5 transition-transform duration-300 shadow-lg"
-                    >
-                      <div className="flex justify-center items-center w-24 h-24 mx-auto bg-white/10 rounded-lg overflow-hidden">
-                        <DotLottieReact
-                          src={hobby.animation}
-                          loop
-                          autoplay
-                          playOnHover={false}
-                          className="w-20 h-20"
-                        />
+          <div className="flex justify-center">
+            <div className="w-full max-w-4xl">
+              <div className="glass-card glass-card-elegant p-8 rounded-3xl">
+                <h3 className="text-2xl font-semibold mb-8 flex items-center gap-3 text-gray-800">
+                  <Coffee className="h-8 w-8 text-purple-500" />
+                  What I Love
+                </h3>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                  {hobbies.map((hobby, index) => {
+                    return (
+                      <div
+                        key={index}
+                        className="p-6 text-center rounded-2xl bg-white/70 border border-white/80 backdrop-blur-sm transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 hover:bg-white/90"
+                      >
+                        <div className="flex justify-center items-center w-20 h-20 mx-auto bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl overflow-hidden shadow-md border border-white/60">
+                          <DotLottieReact
+                            src={hobby.animation}
+                            loop
+                            autoplay
+                            playOnHover={false}
+                            className="w-16 h-16"
+                          />
+                        </div>
+                        <p className="font-semibold mt-4 text-gray-800">{hobby.text}</p>
                       </div>
-                      <p className="font-medium mt-3 text-white">{hobby.text}</p>
-                    </div>
-                  );
-                })
-                }
-
+                    );
+                  })
+                  }
+                </div>
               </div>
             </div>
           </div>
@@ -359,37 +344,37 @@ export default function Home() {
       <section className="md:py-32 py-16 animate-section relative">
         <div className="absolute inset-0 animated-bg opacity-10"></div>
         <SparkleEffect />
-        <div className="container px-4 relative">
+        <div className="container px-4 relative mx-auto">
           <h2 className="text-4xl font-bold mb-16 text-center gradient-text">Get in Touch</h2>
-          <div className="max-w-xl mx-auto">
-            <div className="glass-card p-4 md:p-8 rounded-2xl card-hover-effect">
-              <div className="grid gap-12">
+          <div className="flex justify-center">
+            <div className="w-full max-w-2xl">
+              <div className="glass-card glass-card-primary p-8 rounded-3xl card-hover-effect">
                 <div className="space-y-6">
-                  <div className="p-4 rounded-lg bg-white/5 flex items-center gap-4 hover:scale-105 transition-transform">
-                    <div className="h-12 w-12 rounded-full bg-blue-400/20 flex items-center justify-center">
-                      <Mail className="h-6 w-6 text-blue-400" />
+                  <div className="p-6 rounded-2xl bg-white/60 border border-white/80 backdrop-blur-sm flex items-center gap-4 hover:scale-105 transition-transform">
+                    <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center shadow-md">
+                      <Mail className="h-7 w-7 text-blue-600" />
                     </div>
                     <div>
-                      <p className="text-sm text-primary/60">Email</p>
-                      <Link href={'mailto:thakkarvinay6293@gmail.com'} className="font-medium">thakkarvinay6293@gmail.com</Link>
+                      <p className="text-sm text-gray-500 font-medium">Email</p>
+                      <Link href={'mailto:thakkarvinay6293@gmail.com'} className="font-semibold text-gray-800 hover:text-blue-600 transition-colors">thakkarvinay6293@gmail.com</Link>
                     </div>
                   </div>
-                  <div className="p-4 rounded-lg bg-white/5 flex items-center gap-4 hover:scale-105 transition-transform">
-                    <div className="h-12 w-12 rounded-full bg-purple-400/20 flex items-center justify-center">
-                      <Phone className="h-6 w-6 text-purple-400" />
+                  <div className="p-6 rounded-2xl bg-white/60 border border-white/80 backdrop-blur-sm flex items-center gap-4 hover:scale-105 transition-transform">
+                    <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-purple-100 to-purple-200 flex items-center justify-center shadow-md">
+                      <Phone className="h-7 w-7 text-purple-600" />
                     </div>
                     <div >
-                      <p className="text-sm text-primary/60">Phone</p>
-                      <Link href='tel:+919737050180' className="font-medium">+91 97370 50180</Link>
+                      <p className="text-sm text-gray-500 font-medium">Phone</p>
+                      <Link href='tel:+919737050180' className="font-semibold text-gray-800 hover:text-purple-600 transition-colors">+91 97370 50180</Link>
                     </div>
                   </div>
-                  <div className="p-4 rounded-lg bg-white/5 flex items-start gap-4 hover:scale-105 transition-transform">
-                    <div className="h-12 w-12 min-w-12 rounded-full bg-blue-400/20 flex items-center justify-center">
-                      <MapPin className="h-6 w-6 text-blue-400" />
+                  <div className="p-6 rounded-2xl bg-white/60 border border-white/80 backdrop-blur-sm flex items-start gap-4 hover:scale-105 transition-transform">
+                    <div className="h-14 w-14 min-w-14 rounded-2xl bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center shadow-md">
+                      <MapPin className="h-7 w-7 text-blue-600" />
                     </div>
                     <div>
-                      <p className="text-sm text-primary/60">Location</p>
-                      <p className="font-medium whitespace-pre-wrap">{`"Laxmi Niwas", 103/4,\nRasala Camp, Uper Coat,\nBhavnagar - 364 001`}</p>
+                      <p className="text-sm text-gray-500 font-medium">Location</p>
+                      <p className="font-semibold text-gray-800 whitespace-pre-wrap">{`"Laxmi Niwas", 103/4,\nRasala Camp, Uper Coat,\nBhavnagar - 364 001`}</p>
                     </div>
                   </div>
                 </div>
@@ -397,28 +382,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        {/* <AnimatedCharacter
-          imageUrl="https://assets5.lottiefiles.com/packages/lf20_v1yudlrx.json"
-          position="left"
-        /> */}
-
-
       </section>
-
-      {/* <section className="md:py-32 py-16 animate-section relative">
-          <div className="absolute inset-0 animated-bg opacity-10"></div>
-          <SparkleEffect />
-          <div className="container px-4 relative">
-            <div className="flex justify-center items-center w-80 h-80 mx-auto bg-white/10 rounded-lg overflow-hidden">
-              <DotLottieReact
-                src="https://lottie.host/882b6b48-3930-4ab1-9529-ef597482132a/JmV8Bqf6lV.lottie"
-                loop
-                autoplay
-                className="w-64 h-64"
-              />
-            </div>
-          </div>
-        </section> */}
     </main>
   );
 }

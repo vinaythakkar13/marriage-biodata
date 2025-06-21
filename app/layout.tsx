@@ -1,13 +1,34 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Playfair_Display } from 'next/font/google';
-import { cn } from '@/lib/utils';
+import { Inter } from 'next/font/google';
 
-const playfair = Playfair_Display({ subsets: ['latin'] });
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Marriage Bio-data | Vinay Thakkar',
-  description: 'Personal marriage bio-data website showcasing profile and details',
+  title: 'Vinay Thakkar - Marriage Profile | Software Engineer & Tech Enthusiast',
+  description: 'Explore Vinay Thakkar\'s comprehensive marriage profile. Software engineer with expertise in React, Node.js, and modern web technologies. Discover background, interests, and professional achievements.',
+  keywords: 'Vinay Thakkar, marriage profile, software engineer, React developer, Node.js, web development, tech enthusiast, marriage biodata',
+  authors: [{ name: 'Vinay Thakkar' }],
+  creator: 'Vinay Thakkar',
+  publisher: 'Vinay Thakkar',
+  robots: 'index, follow',
+  openGraph: {
+    title: 'Vinay Thakkar - Marriage Profile | Software Engineer & Tech Enthusiast',
+    description: 'Explore Vinay Thakkar\'s comprehensive marriage profile. Software engineer with expertise in React, Node.js, and modern web technologies.',
+    type: 'website',
+    locale: 'en_US',
+    siteName: 'Vinay Thakkar Marriage Profile',
+    images: [
+      {
+        url: '@/assets/images/vinay_thakkar_profile.jpg', // Make sure this path matches your actual profile image
+        width: 1200,
+        height: 630,
+        alt: 'Vinay Thakkar - Software Engineer and Tech Enthusiast',
+        type: 'image/jpeg',
+      },
+    ],
+  },
+  metadataBase: new URL('https://your-domain.com'), // Replace with your actual domain
 };
 
 export default function RootLayout({
@@ -17,7 +38,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={cn(playfair.className, "antialiased bg-background")}>
+      <body className={`${inter.className}, "antialiased bg-white`}>
         {children}
       </body>
     </html>
