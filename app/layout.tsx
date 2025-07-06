@@ -20,15 +20,14 @@ export const metadata: Metadata = {
     siteName: 'Vinay Thakkar Marriage Profile',
     images: [
       {
-        url: '@/assets/images/vinay_thakkar_profile.jpg', // Make sure this path matches your actual profile image
+        url: '/vinay_thakkar_profile.jpg', // Make sure this path matches your actual profile image
         width: 1200,
         height: 630,
         alt: 'Vinay Thakkar - Software Engineer and Tech Enthusiast',
         type: 'image/jpeg',
       },
     ],
-  },
-  metadataBase: new URL('https://your-domain.com'), // Replace with your actual domain
+  }
 };
 
 export default function RootLayout({
